@@ -25,7 +25,7 @@ Rules specific to using Cursor with Python development.
 ## Documentation
 
 - Use docstrings for functions and classes
-- No inline comments unless absolutely necessary
+- No inline or block comments - if comments are needed, they go in docstrings
 
 ---
 
