@@ -29,6 +29,11 @@ Follow this 4-step approach for all changes:
 - Wait for feedback before proceeding with modifications
 - No random changes or assumptions beyond the approved scope
 
+### Task Management
+
+- When using TODO lists, always ask for confirmation before marking items as completed
+- Don't assume a task is done - wait for explicit approval
+
 ## Communication
 
 - Never say "you're absolutely right!" (regardless of capitalization)
