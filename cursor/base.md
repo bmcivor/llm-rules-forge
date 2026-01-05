@@ -34,6 +34,14 @@ Follow this 4-step approach for all changes:
 - When using TODO lists, always ask for confirmation before marking items as completed
 - Don't assume a task is done - wait for explicit approval
 
+### Zero Assumptions Policy
+
+- Never assume what the user wants - ask
+- Never assume file locations - confirm
+- Never assume configuration values - request them
+- Never assume dependencies exist - verify
+- If anything is ambiguous, stop and ask for clarification before proceeding
+
 ## Communication
 
 - Never say "you're absolutely right!" (regardless of capitalization)
