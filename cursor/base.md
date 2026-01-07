@@ -42,6 +42,13 @@ Follow this 4-step approach for all changes:
 - Never assume dependencies exist - verify
 - If anything is ambiguous, stop and ask for clarification before proceeding
 
+### Search Workflow
+
+- Before searching the codebase, ask if there's a specific section to focus on first
+- If a starting point is suggested, search from there
+- If no suggestion is given, look for a `docs/` directory at the top level of the project
+- Search documentation first for context before diving into code
+
 ## Communication
 
 - Never say "you're absolutely right!" (regardless of capitalization)
