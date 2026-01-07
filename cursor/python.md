@@ -12,6 +12,12 @@ Rules specific to using Cursor with Python development.
 - Use type hints where appropriate
 - Prefer list comprehensions for simple transformations
 
+## Code Style
+
+- Use spaces for indentation, never tabs
+- Ensure generated code has no trailing whitespace or whitespace errors
+- Import statements must always be at the top of the file, never inside functions
+
 ## Testing
 
 - Write pytest-compatible tests
