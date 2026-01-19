@@ -21,6 +21,8 @@ llm-rules-forge/
 │   └── base.md               # Ticketing/project management rules
 ├── ansible/
 │   └── base.md               # Ansible-specific rules
+├── code-review/
+│   └── base.md               # Code review rules
 ├── generate.sh               # Tool to concatenate rules
 └── Makefile                  # Installation helpers
 ```
@@ -44,7 +46,7 @@ make uninstall
 Generate combined rules for your setup:
 
 ```bash
-llm-forge cursor python git ticketing > my-rules.md
+llm-forge cursor python git ticketing code-review > my-rules.md
 ```
 
 See available options:
@@ -64,7 +66,7 @@ llm-forge cursor python git
 llm-forge cursor javascript ticketing
 
 # Everything
-llm-forge cursor python git ticketing
+llm-forge cursor python git ticketing code-review
 ```
 
 Copy the output into your LLM tool's configuration (e.g., Cursor Settings → User Rules).
@@ -76,7 +78,7 @@ Rules follow an inheritance chain:
 1. **Root `base.md`**: Universal principles that apply everywhere
 2. **Tool-specific `base.md`**: Tool-specific guidelines (e.g., `cursor/base.md`)
 3. **Language-specific files**: Combined tool + language rules (e.g., `cursor/python.md`)
-4. **Module files**: Additional rule sets (e.g., `git/base.md`, `ticketing/base.md`)
+4. **Module files**: Additional rule sets (e.g., `git/base.md`, `ticketing/base.md`, `code-review/base.md`)
 
 Each level builds upon the previous, allowing for shared best practices while maintaining specificity where needed.
 
