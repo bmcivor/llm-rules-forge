@@ -19,6 +19,8 @@ llm-rules-forge/
 │   └── base.md               # Git-specific rules
 ├── ticketing/
 │   └── base.md               # Ticketing/project management rules
+├── ansible/
+│   └── base.md               # Ansible-specific rules
 ├── code-review/
 │   └── base.md               # Code review rules
 ├── generate.sh               # Tool to concatenate rules
