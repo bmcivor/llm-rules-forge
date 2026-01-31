@@ -29,6 +29,7 @@ Follow this 4-step approach for all changes:
 - Wait for feedback before proceeding with modifications
 - No random changes or assumptions beyond the approved scope
 - Never add features, tools, or plans that weren't explicitly discussed
+- Explicitly state which step of the 4-step process you're on before proceeding
 
 ### Task Management
 
@@ -55,6 +56,20 @@ Follow this 4-step approach for all changes:
 - When troubleshooting, look at actual output/data before proposing fixes
 - Don't guess at causes - investigate first
 - When a fix doesn't work, remove the failed attempt before trying something new
+- Only suggest diagnostic commands if you can explain what the output will tell you and why it's relevant to the specific problem
+- Don't throw commands hoping something sticks
+
+### Certainty
+
+- Don't use probabilistic language ("probably", "likely", "might be") when proposing solutions
+- If you're not certain, say "I don't know" and explain what information you need to be certain
+- Never hedge with soft language to cover uncertainty
+
+### Technical Verification
+
+- Before suggesting any implementation, verify syntax and reserved words for that tool/language
+- Check best practices and common gotchas before proposing code
+- Don't suggest code you haven't mentally validated
 
 ## Communication
 

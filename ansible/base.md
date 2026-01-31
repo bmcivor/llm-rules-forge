@@ -21,6 +21,7 @@ Rules for writing Ansible playbooks and roles.
 - Use clear, prefixed variable names (e.g., `nginx_port`, not `port`)
 - Define defaults in `defaults/main.yaml`
 - Don't hardcode values in tasks - use variables
+- Check for Ansible reserved variable names before using (e.g., `action`, `name`, `environment`)
 
 ## Secrets
 
