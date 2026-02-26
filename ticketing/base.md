@@ -16,6 +16,8 @@ Rules for working with ticketing and project management systems.
 - Follow a standard format when creating tickets
 - Include clear acceptance criteria
 - Keep scope focused - one concern per ticket
+- Only include fields and metadata that the user will use in the markdown - don't duplicate what's tracked in their project management tool
+- Confirm the required scope before writing - don't expand scope to what seems logical, stick to what's specified
 
 ## Ticket Standard Format
 

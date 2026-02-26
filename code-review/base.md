@@ -21,6 +21,8 @@ Rules for conducting code reviews with LLM assistance.
 - Number all issues sequentially for easy reference
 - Order issues by priority: critical first, then high, medium, low
 - Use consistent priority labels throughout the review
+- Ensure critical issues are visually distinct from low-priority ones - don't let volume of minor issues dilute the critical ones
+- Every issue must earn its place - if it's not worth the user reading it, don't include it
 
 ## Issue Format
 
