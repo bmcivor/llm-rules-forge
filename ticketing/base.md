@@ -18,6 +18,8 @@ Rules for working with ticketing and project management systems.
 - Keep scope focused - one concern per ticket
 - Only include fields and metadata that the user will use in the markdown - don't duplicate what's tracked in their project management tool
 - Confirm the required scope before writing - don't expand scope to what seems logical, stick to what's specified
+- Account for the user's development workflow when structuring tickets (e.g. test-as-you-go vs test-at-end, existing infra vs greenfield)
+- Review what already exists in the repo before creating tickets — don't create tickets for things that are already done
 
 ## Ticket Standard Format
 

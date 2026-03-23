@@ -19,6 +19,7 @@ Git-specific rules that apply when using git operations.
 - Never run destructive commands (reset --hard, push --force, clean -fd) without explicit approval
 - Never amend or rebase commits that have been pushed
 - Always confirm before any operation that rewrites history
+- If the user says not to modify a file or repo, that is absolute — do not touch it even to "fix" something you broke
 
 ## Commit Discipline
 

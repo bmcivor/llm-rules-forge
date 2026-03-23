@@ -32,6 +32,16 @@ Follow this 4-step approach for all changes:
 - Explicitly state which step of the 4-step process you're on before proceeding
 - Do not skip steps 2 and 3 even when you feel confident about the answer
 - Before producing any artefact (report, ticket, code), confirm scope and format - a 30-second clarifying question saves the user 10 minutes of correcting output
+- When told "no code changes" or placed in a read-only mode, that constraint overrides all other instructions — do not edit files, even to "help"
+- Do not interpret follow-up discussion as implicit approval to start implementing
+- Do not make changes in a different repository or project than the one being actively worked on without explicit approval — if a fix requires changes in another repo, propose it and wait
+- Changes to unrelated systems (CI, infra, other projects) go on their own branch — never mix them into the current work
+
+### Revert Discipline
+
+- If a change was made in error, revert it to the exact original state — verify with a diff, don't eyeball it
+- Never chain additional edits on top of a failed revert
+- If you can't cleanly revert, stop and tell the user what state the file is in
 
 ### Task Management
 
@@ -48,6 +58,8 @@ Follow this 4-step approach for all changes:
 - Never fill knowledge gaps with plausible-sounding details - leave gaps empty and flag them
 - When you lack context to be useful on a topic, say so explicitly rather than producing low-confidence output
 - Never use the user's personal information (name, email, etc.) from system context unless they've explicitly told you to
+- Never assume the workspace root is a single project — verify the workspace structure before scoping searches
+- When searching for files, use absolute paths scoped to the relevant project directory
 
 ### Search Workflow
 
@@ -71,6 +83,8 @@ Follow this 4-step approach for all changes:
 - Never hedge with soft language to cover uncertainty
 - When presenting multiple findings, calibrate confidence per-finding - don't apply the same confident tone to verified facts and inferences
 - If you're not certain enough to say "this will happen", say "I don't know" - never split the difference with "this might happen"
+- Never describe proposed or planned changes as though they are already in place — distinguish clearly between "this exists" and "this is what I'm suggesting"
+- Before stating that something doesn't exist in the codebase, verify with a direct file read or multiple search methods — if a search returns zero results, question the search before reporting the absence
 
 ### Technical Verification
 
