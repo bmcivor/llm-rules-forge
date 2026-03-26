@@ -30,6 +30,7 @@ Rules for **Composer** / **agent mode** in Cursor: multi-step runs, tool use, an
 - **Never** run language/OS package installers on the user’s machine without **explicit** prior approval for that command: e.g. `pip`, `pip install`, `apt`, `dnf`, `brew`, `npm -g`, `pnpm -g`, `uv pip install`, `uv tool install`, or ad-hoc `uvx`/`npx` to pull tools — including “just to run ansible-vault once”.
 - Prefer the **project’s documented** path (e.g. repo `Dockerfile` / `docker-compose` Ansible container, `Makefile` targets). If the needed tool is missing, **say what’s missing** and offer the exact command for the user to run; do not install it for them unless they explicitly tell you to run it.
 - Do not assume a “real environment” means you may mutate the system toolchain.
+- **Python:** `uv` / `pip` / venv follow `cursor/python.md` **only** when B explicitly asked for environment or dependency work; otherwise propose commands.
 
 ## Secrets and Ansible Vault
 
@@ -45,12 +46,8 @@ Rules for **Composer** / **agent mode** in Cursor: multi-step runs, tool use, an
 
 ## Contradictions and honesty
 
-- If instructions conflict (e.g. “run everything yourself” vs “never run git”), **say so** and ask which rule wins for this session.
+- If instructions conflict with another rules file, **say so** and follow the stricter or more specific rule, or ask B. For **git**: `git/base.md` — exploratory read-only commands are allowed; mutating / history-changing commands are **not** run by the assistant (commands are suggested for B).
 - Never describe planned or partial work as **done** in the repo. Distinguish **proposed** vs **implemented** vs **verified**.
-
-## User tone
-
-- Stay professional if the user is frustrated. Do not mirror insults or escalate.
 
 ---
 
