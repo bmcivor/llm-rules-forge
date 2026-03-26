@@ -10,47 +10,74 @@ done
 SCRIPT_DIR="$(cd "$(dirname "$SOURCE")" && pwd)"
 
 show_help() {
-    echo "Usage: llm-forge <tool> [language] [modules...]"
+    echo "Usage: llm-forge <tool> [extras...]"
     echo ""
-    echo "Concatenates rule files for LLM configuration."
+    echo "Concatenate rule Markdown files for pasting into Cursor (or other) user rules."
+    echo "Order: root base.md → <tool>/base.md → each extra you name, in order."
     echo ""
-    echo "Arguments:"
-    echo "  tool       The IDE/tool (e.g., cursor)"
-    echo "  language   Optional language under the tool (e.g., python, javascript)"
-    echo "  modules    Additional modules to include (e.g., git, ticketing)"
+    echo "Arguments (after tool):"
+    echo "  • Extras under the tool dir  — e.g. cursor: python, javascript, composer"
+    echo "    (composer = Cursor Composer / agent-mode hardening; not a language.)"
+    echo "  • Top-level modules          — ansible, git, ticketing, code-review"
+    echo "    (each has <name>/base.md at repo root)"
     echo ""
     echo "Options:"
-    echo "  --list     Show available tools, languages, and modules"
-    echo "  --help     Show this help"
+    echo "  --list, -l   List tools, per-tool extras, and top-level modules"
+    echo "  --help, -h   Show this help"
+    echo ""
+    echo "  all          Same as: cursor + every cursor extra + every top-level module"
+    echo "               (order: base chain, then extras sorted, then modules sorted)"
     echo ""
     echo "Examples:"
-    echo "  llm-forge cursor python git ticketing"
+    echo "  llm-forge all > my-rules.md"
+    echo "  llm-forge cursor composer python git ticketing"
     echo "  llm-forge cursor python git ticketing > my-rules.md"
     echo "  llm-forge --list"
 }
 
 list_available() {
-    echo "Tools:"
+    echo "Tools (each has <tool>/base.md):"
     for dir in "$SCRIPT_DIR"/*/; do
         dir_name=$(basename "$dir")
         [[ -f "$dir/base.md" ]] && [[ "$dir_name" != "docs" ]] && echo "  - $dir_name"
     done
     echo ""
-    echo "Languages (per tool):"
+    echo "Per-tool extras (optional files: <tool>/<name>.md, omit base.md):"
     for tool_dir in "$SCRIPT_DIR"/*/; do
         tool=$(basename "$tool_dir")
         [[ "$tool" == "docs" ]] && continue
-        langs=$(find "$tool_dir" -maxdepth 1 -name "*.md" ! -name "base.md" -exec basename {} .md \; 2>/dev/null | tr '\n' ' ')
-        [[ -n "$langs" ]] && echo "  $tool: $langs"
+        extras=$(find "$tool_dir" -maxdepth 1 -name "*.md" ! -name "base.md" -exec basename {} .md \; 2>/dev/null | sort | tr '\n' ' ')
+        [[ -n "$extras" ]] && echo "  $tool → $extras"
     done
     echo ""
-    echo "Modules (top-level):"
+    echo "Top-level modules (optional: <name>/base.md):"
     for dir in "$SCRIPT_DIR"/*/; do
         dir_name=$(basename "$dir")
         [[ "$dir_name" == "cursor" ]] && continue
         [[ "$dir_name" == "docs" ]] && continue
         [[ -f "$dir/base.md" ]] && echo "  - $dir_name"
     done
+    echo ""
+    echo "Full bundle:            llm-forge all"
+}
+
+# cursor + all cursor/*.md (except base) + all */base.md modules (except cursor, docs); names sorted per group.
+collect_all_argv() {
+    local argv=(cursor)
+    local f d n
+    while IFS= read -r f; do
+        argv+=("$(basename "$f" .md)")
+    done < <(find "$SCRIPT_DIR/cursor" -maxdepth 1 -name "*.md" ! -name "base.md" | LC_ALL=C sort)
+    while IFS= read -r d; do
+        argv+=("$d")
+    done < <(
+        for dir in "$SCRIPT_DIR"/*/; do
+            n=$(basename "$dir")
+            [[ "$n" == "cursor" || "$n" == "docs" ]] && continue
+            [[ -f "$dir/base.md" ]] && echo "$n"
+        done | LC_ALL=C sort
+    )
+    printf '%s\0' "${argv[@]}"
 }
 
 concatenate() {
@@ -97,6 +124,15 @@ case "$1" in
     --list|-l)
         list_available
         exit 0
+        ;;
+    all)
+        shift
+        if [[ $# -gt 0 ]]; then
+            echo "Error: 'all' does not take extra arguments (got: $*)." >&2
+            exit 1
+        fi
+        mapfile -d '' -t _all_argv < <(collect_all_argv)
+        concatenate "${_all_argv[@]}"
         ;;
     *)
         concatenate "$@"

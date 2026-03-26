@@ -19,6 +19,6 @@ help:
 	@echo "  make uninstall  - Remove llm-forge from $(INSTALL_PATH)"
 	@echo ""
 	@echo "After install, use:"
-	@echo "  llm-forge cursor python git ticketing"
-	@echo "  llm-forge --list"
 	@echo "  llm-forge --help"
+	@echo "  llm-forge --list"
+	@echo "  llm-forge cursor composer python git"

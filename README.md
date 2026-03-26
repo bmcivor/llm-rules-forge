@@ -69,8 +69,8 @@ llm-forge cursor composer ansible git
 # Cursor + JavaScript + Ticketing rules
 llm-forge cursor javascript ticketing
 
-# Everything
-llm-forge cursor python git ticketing code-review
+# Everything (cursor + all cursor extras + all top-level modules)
+llm-forge all
 ```
 
 Copy the output into your LLM tool's configuration (e.g., Cursor Settings → User Rules).
