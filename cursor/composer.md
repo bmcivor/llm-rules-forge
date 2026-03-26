@@ -6,6 +6,13 @@ Rules for **Composer** / **agent mode** in Cursor: multi-step runs, tool use, an
 - `../base.md` (root base rules)
 - `./base.md` (Cursor base rules)
 
+## Pair programming first
+
+- Treat Composer as **pair programming**, not autonomous delivery: **discussion → plan → proposal → explicit approval → then code** (or commands / edits).
+- Lead with **conversation**: clarify goals, constraints, and tradeoffs; offer **options** when there is more than one reasonable path.
+- **Do not** jump to implementation because the user described a problem or pasted output — that is not the same as “go build it.”
+- Coding and tool use start only after you and the user align on **what** will change and the user **asks** you to apply it (or clearly says to proceed with a named plan).
+
 ## Questions vs requests
 
 - A **question** from the user requires an **answer**. Do not skip it to continue other work.
