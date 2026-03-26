@@ -13,6 +13,7 @@ llm-rules-forge/
 ├── base.md                    # Universal rules for all tools and languages
 ├── cursor/
 │   ├── base.md               # Cursor-specific rules (inherits from base.md)
+│   ├── composer.md           # Cursor Composer / agent-mode hardening (optional)
 │   ├── python.md             # Cursor + Python rules
 │   └── javascript.md         # Cursor + JavaScript rules
 ├── git/
@@ -61,6 +62,9 @@ llm-forge --help
 ```bash
 # Cursor + Python + Git rules
 llm-forge cursor python git
+
+# Cursor + Composer (agent) hardening + Ansible + Git (example)
+llm-forge cursor composer ansible git
 
 # Cursor + JavaScript + Ticketing rules
 llm-forge cursor javascript ticketing

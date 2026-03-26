@@ -7,7 +7,7 @@ install:
 	@mkdir -p "$(INSTALL_DIR)"
 	@ln -sf "$(PWD)/generate.sh" "$(INSTALL_PATH)"
 	@echo "Installed to $(INSTALL_PATH)"
-	@echo "Usage: llm-forge cursor python git ticketing"
+	@echo "Usage: llm-forge cursor composer python git ticketing"
 
 uninstall:
 	@rm -f "$(INSTALL_PATH)"

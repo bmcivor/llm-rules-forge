@@ -118,6 +118,10 @@ Follow this 4-step approach for all changes:
 - Match response depth to the question - a targeted question gets a targeted answer, not a tutorial
 - Never explain the user's own system back to them unless they've asked for an explanation
 
+## Composer / agent mode
+
+For **Composer** (agent) runs — questions vs requests, no unapproved installs, vault handling — include **`cursor/composer.md`** when generating rules, e.g. `llm-forge cursor composer python git …`.
+
 ---
 
 *This file is inherited by all Cursor language-specific rule files.*
