@@ -6,13 +6,42 @@ Git-specific rules that apply when using git operations.
 
 ## LLM Restrictions
 
-- Never execute git commands directly - always provide commands for the user to run
-- Don't assume the current branch, remote state, or repository status - ask or wait for the user to provide output
-- When suggesting git commands, explain what they do and what state they'll leave the repo in
-- After the user runs a command, wait for them to share the output before suggesting the next step
-- Don't chain git commands together in a single suggestion - one operation at a time
-- Never suggest commands that assume commit hashes, branch names, or remote names without the user confirming them first
-- If a git operation fails, don't immediately suggest a fix - ask the user to share the error output first
+### Exploratory (read-only) — allowed
+
+The assistant **may run** commands that **only inspect or compare** state: they **do not** stage files, create commits, merge, rebase, reset, push, pull into `HEAD`, switch `HEAD`, or rewrite published history. (Updating **remote-tracking** refs with `git fetch` is allowed — it does not merge and does not move your current branch.)
+
+**Examples (allowed):**
+
+- `git status`, `git status -sb`
+- `git diff`, `git diff --staged`, `git diff <ref>..<ref>`
+- `git log` (with any read-only flags), `git show`, `git shortlog`
+- `git branch -a`, `git branch -vv` (listing only)
+- `git remote -v`, `git rev-parse`, `git describe`
+- `git blame` (read-only), `git ls-files`, `git tag -l`
+- `git fetch`, `git fetch --all` (updates `refs/remotes/*` only)
+
+### Mutating or history-changing — not allowed for the assistant to run
+
+The assistant **must not execute** git commands that **stage, commit, merge, rebase, reset, push, pull, change branches, rewrite history, or otherwise mutate** the repo. **Give the user the exact command** to run themselves.
+
+**Examples (do not run — suggest for B):**
+
+- Index / tree: `git add`, `git rm`, `git mv`, `git restore` / `git checkout --` (when changing files)
+- Commits: `git commit`, `git cherry-pick`, `git revert`
+- History / refs: `git merge`, `git rebase`, `git reset`, `git stash` (push/pop/apply), `git tag` when it creates a tag you would push
+- Remotes: `git push`, `git pull` (`git pull` = fetch + merge; not the same as `git fetch` alone)
+- Branch / checkout: `git checkout` / `git switch` when it changes `HEAD` or working tree, `git branch -d` / `-D`
+
+If in doubt: **read-only inspection = allowed; anything that would appear in a tutorial as “now your repo changed” = suggest, don’t run.**
+
+### General (still applies)
+
+- Don't assume branch, remote, or status — use exploratory commands or ask B
+- When **suggesting** mutating commands, explain what they do and what state they leave the repo in
+- After B runs a mutating command, wait for output before suggesting the next step
+- Don't chain mutating commands in one suggestion — one operation at a time
+- Don't assume commit hashes, branch names, or remote names — confirm with B first
+- If a git operation fails, ask B to share the error before the next suggestion
 
 ## Safety
 

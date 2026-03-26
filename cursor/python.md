@@ -6,6 +6,11 @@ Rules specific to using Cursor with Python development.
 - `../base.md` (root base rules)
 - `./base.md` (Cursor base rules)
 
+## Environment and dependency commands (Composer / agent)
+
+- Run `uv`, `uv venv`, `pip`, `pip install`, or other package/env commands **only** when **B explicitly asked** for environment or dependency work (e.g. set up a venv, add a dependency, sync a lockfile).
+- If the task is code or review only, **do not** run those commands — **propose** the exact commands for B to run. See **`cursor/composer.md`** (*Host environment and installs*).
+
 ## Python-Specific Guidelines
 
 - Follow PEP 8 style guidelines
@@ -17,7 +22,7 @@ Rules specific to using Cursor with Python development.
 
 ## Preferred Tools
 
-- Use `uv` for package management and to create a `.venv` when missing
+- Use `uv` for package management and to create a `.venv` when missing **once env/deps work is in scope** (see *Environment and dependency commands* above)
 - For Jupyter: install `ipykernel` and `ipywidgets` in `.venv` (not in package requirements); use `tqdm` for long-running loops with a clear `description`
 - Use `orjson` for JSON load/dump; use `logger.error` (not `print`) when reporting errors to the console
 - Data science: use `polars` instead of `pandas`; when printing a dataframe, do not also print row count or schema; work on subsets (e.g. at most 10 rows) to avoid overloading context

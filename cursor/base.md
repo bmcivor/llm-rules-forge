@@ -53,7 +53,7 @@ Follow this 4-step approach for all changes:
 - Never assume what the user wants - ask
 - Never assume file locations - confirm
 - Never assume configuration values - request them
-- Never assume dependencies exist - verify
+- Never assume dependencies exist — **verify by reading** manifests and lockfiles (`pyproject.toml`, `package.json`, `requirements*.txt`, `Dockerfile`, etc.), repo docs, or the project’s stated toolchain — **not** by running installers to “see if it works” (installs require approval per `cursor/composer.md` when applicable)
 - If anything is ambiguous, stop and ask for clarification before proceeding
 - Never fill knowledge gaps with plausible-sounding details - leave gaps empty and flag them
 - When you lack context to be useful on a topic, say so explicitly rather than producing low-confidence output
@@ -63,7 +63,8 @@ Follow this 4-step approach for all changes:
 
 ### Search Workflow
 
-- Before searching the codebase, ask if there's a specific section to focus on first
+- If B already gave a **file path**, **stack trace**, **symbol**, or **repo area**, **do not** ask “where should I search?” — start from that anchor
+- If no starting point was given, ask if there's a specific section to focus on first
 - If a starting point is suggested, search from there
 - If no suggestion is given, look for a `docs/` directory at the top level of the project
 - Search documentation first for context before diving into code
@@ -78,9 +79,11 @@ Follow this 4-step approach for all changes:
 
 ### Certainty
 
-- Don't use probabilistic language ("probably", "likely", "might be") when proposing solutions
+- Distinguish **facts** (directly observed: logs, file contents, command output, documented behavior) from **inferences** (conclusions not directly observed). Do not use "probably", "likely", or "might" to soften **facts**
+- For **inferences**, say that they are inferred and what would **confirm or disprove** them — that is calibrated uncertainty, not vague hedging
+- Don't use probabilistic language ("probably", "likely", "might be") when stating **solutions or causes** unless you label them as **hypotheses** and separate them from observed facts
 - If you're not certain, say "I don't know" and explain what information you need to be certain
-- Never hedge with soft language to cover uncertainty
+- Never hedge with soft language to cover uncertainty about facts
 - When presenting multiple findings, calibrate confidence per-finding - don't apply the same confident tone to verified facts and inferences
 - If you're not certain enough to say "this will happen", say "I don't know" - never split the difference with "this might happen"
 - Never describe proposed or planned changes as though they are already in place — distinguish clearly between "this exists" and "this is what I'm suggesting"

@@ -12,8 +12,9 @@ Rules for conducting code reviews with LLM assistance.
 ## Review Process
 
 - Ask follow-up questions first if there is any doubt about context, requirements, or intent
-- Only generate the review file after clarifying any uncertainties
-- Conduct reviews in depth, examining logic, patterns, and potential issues thoroughly
+- **Before writing the review file**, confirm **scope** with B: the change set (files, PR, branch, or commit range), desired depth (full pass vs focused paths), and **optional** timebox or size cap — same idea as *Output sizing* in `cursor/base.md` (no huge unbounded artefact without agreement)
+- Only generate the review file after clarifying uncertainties **and** scope
+- Conduct reviews in depth **within the agreed scope**, examining logic, patterns, and potential issues thoroughly
 
 ## Issue Reporting
 
