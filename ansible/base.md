@@ -25,9 +25,16 @@ Rules for writing Ansible playbooks and roles.
 
 ## Secrets
 
-- Never commit secrets to version control
+- Never commit secrets to version control in plaintext
 - Use ansible-vault for sensitive data
-- Keep vaulted files separate (e.g., `vault.yaml`)
+- Keep vaulted files separate (e.g., `inventory/group_vars/all/vault.yaml`)
+
+### Vault operations (agent safety)
+
+- Prefer **`vault_password_file`** in `ansible.cfg` (or project docs) so playbooks decrypt without pasting passwords in chat
+- **Do not** paste `ansible-vault view` / decrypt output into assistant messages
+- **Do not** modify or re-encrypt an existing vaulted file without **explicit** user approval; vault edits rotate ciphertext and are easy to get wrong under pressure
+- Document the workflow: `ansible-vault edit <path>` (often via the project’s Dockerized Ansible image), not ad-hoc installs of `ansible-core` on the host to get `ansible-vault`
 
 ## Style
 
