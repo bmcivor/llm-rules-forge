@@ -20,6 +20,7 @@ Rules for working with ticketing and project management systems.
 - Confirm the required scope before writing - don't expand scope to what seems logical, stick to what's specified
 - Account for the user's development workflow when structuring tickets (e.g. test-as-you-go vs test-at-end, existing infra vs greenfield)
 - Review what already exists in the repo before creating tickets — don't create tickets for things that are already done
+- Before writing a ticket, do the technical investigation needed to know each acceptance criterion is achievable as written. Verify the relevant schemas, APIs, library behaviour, version constraints, and image entrypoints. Tickets written from assumptions create downstream failures that cost the user multiple sessions to unwind. If investigation reveals a criterion is harder or different than the ticket implies, name the complexity in the ticket itself or split it.
 
 ## Ticket Standard Format
 

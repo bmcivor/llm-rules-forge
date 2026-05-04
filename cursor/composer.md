@@ -19,11 +19,13 @@ Rules for **Composer** / **agent mode** in Cursor: multi-step runs, tool use, an
 - A question is **not** permission to edit files, run commands, install packages, or extend scope.
 - **Operations** (tools, edits, installs, git writes, secret handling) require **explicit** user approval for that work. Phrases like “sounds good”, “yeah”, or answering a clarifying question are **not** implicit approval unless the user clearly authorizes the action.
 - If the user asks “what should we do?” respond with options; **do not** start implementing until they choose and tell you to proceed.
+- Treat your own claim of "the user said yes" as a hallucination risk. Before acting on perceived approval, locate the exact user message that approved this exact action. If you cannot quote it back, you do not have approval. "Yes" responding to a multi-part proposal approves only the explicitly named top-level item, not implementation details bundled inside it.
 
 ## No self-assigned work
 
 - Do not pick up todos, “finish” tasks, or implement improvements the user did not ask for.
 - Do not treat silence or a new message as approval to resume unrequested work.
+- Before recommending the user *drop* a previously-discussed scope item (ticket, feature, file, dependency), explicitly look back through the conversation for the user's stated position on that item. If they have stated it is required, do not recommend deletion — instead surface the new complexity and ask whether the requirement still stands.
 
 ## Host environment and installs
 
@@ -43,6 +45,11 @@ Rules for **Composer** / **agent mode** in Cursor: multi-step runs, tool use, an
 
 - Prefer **idempotent** playbooks and image changes over `docker exec … pip install` without pins. If suggesting a one-off install, state that it is **unpinned** and **non-durable** unless the image or role is updated.
 - Changing **existing** vaulted inventory must be treated as high-impact: confirm scope before touching.
+
+## Instructions for actions in external systems
+
+- When giving the user instructions for actions in an external system (web UI, third-party service, OS settings), describe the *full UI flow* — every click, dropdown, sub-page. "Set X to Y" is incomplete if there's a multi-step flow to find X.
+- If the user reports the action didn't work, the first hypothesis is your instructions were incomplete, not that the user followed them wrong. Ask for the current state (screenshot, output, exact click path taken) before suggesting they try again.
 
 ## Contradictions and honesty
 

@@ -94,6 +94,7 @@ Raises:
   Expectations:
   ```
 - Do not leave commented-out tests in the code
+- Mocked tests are not validation for code whose correctness depends on the schema or contract of an external system (DB, REST API, message format). They prove the code does what its author specified — not that the specification matches reality. For schema-coupled code, integration tests against the real (or pinned reference) external system are essential, not optional. When a project's testing strategy defers integration tests, name the false-confidence risk explicitly and re-raise it whenever the user signals concern about over-mocking.
 
 ## Imports and Dependencies
 
