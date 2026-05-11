@@ -1,10 +1,8 @@
-# Cursor + JavaScript Rules
+# JavaScript Rules
 
-Rules specific to using Cursor with JavaScript development.
+Rules specific to JavaScript development.
 
-**Inherits from:** 
-- `../base.md` (root base rules)
-- `./base.md` (Cursor base rules)
+**Inherits from:** `../base.md`
 
 ## JavaScript-Specific Guidelines
 
@@ -26,5 +24,4 @@ Rules specific to using Cursor with JavaScript development.
 
 ---
 
-*Placeholder for JavaScript-specific rules in Cursor*
-
+*Placeholder for JavaScript-specific rules.*

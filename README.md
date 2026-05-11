@@ -1,31 +1,35 @@
 # llm-rules-forge
 
-Curated, opinionated rule sets for LLM-powered developer tools
+Curated, opinionated rule sets for LLM-powered developer tools.
 
 ## Overview
 
-This repository contains a hierarchical collection of rules and guidelines designed to help LLMs write better code across different tools and languages. Rules are organized by tool (e.g., Cursor) and language (e.g., Python, JavaScript), with inheritance from base configurations.
+This repository contains a collection of rules and guidelines designed to help LLMs write better code across different tools and languages. Rules are organised by concern into focused files that can be selectively bundled for your setup.
 
 ## Structure
 
 ```
 llm-rules-forge/
-├── base.md                    # Universal rules for all tools and languages
-├── cursor/
-│   ├── base.md               # Cursor-specific rules (inherits from base.md)
-│   ├── composer.md           # Cursor Composer / agent-mode hardening (optional)
-│   ├── python.md             # Cursor + Python rules
-│   └── javascript.md         # Cursor + JavaScript rules
-├── git/
-│   └── base.md               # Git-specific rules
-├── ticketing/
-│   └── base.md               # Ticketing/project management rules
-├── ansible/
-│   └── base.md               # Ansible-specific rules
-├── code-review/
-│   └── base.md               # Code review rules
-├── generate.sh               # Tool to concatenate rules
-└── Makefile                  # Installation helpers
+├── base.md                  # Universal rules for everything below
+├── agent/                   # Agent-mode rules (Cursor Composer, Claude Code, Cline, Aider)
+│   ├── base.md              # Directory overview
+│   ├── workflow.md          # 4-step process, key rules, revert discipline, zero assumptions
+│   ├── certainty.md         # Facts vs inferences, "confirmed" reservations
+│   ├── debugging.md         # Investigation discipline, workaround chains
+│   ├── scope.md             # Scope discipline, output sizing
+│   ├── tool-economy.md      # Token usage, agent vs WebFetch, batching
+│   ├── communication.md     # Addressing the user, response sizing
+│   ├── honesty.md           # Anti-sycophancy, attribution, hallucinated-approval guards
+│   └── composer.md          # Pair programming, host installs, secrets, external systems
+├── languages/               # Language-specific rules
+│   ├── python.md
+│   └── javascript.md
+├── git/base.md              # Git rules
+├── ticketing/base.md        # Ticketing / project management rules
+├── ansible/base.md          # Ansible rules
+├── code-review/base.md      # Code review rules
+├── generate.sh              # Concatenation tool
+└── Makefile                 # Installation helpers
 ```
 
 ## Installation
@@ -47,8 +51,10 @@ make uninstall
 Generate combined rules for your setup:
 
 ```bash
-llm-forge cursor python git ticketing code-review > my-rules.md
+llm-forge agent python git ticketing > my-rules.md
 ```
+
+The first argument is a tool directory. All `.md` files in that directory are included automatically — `base.md` first if present, then the rest alphabetically. Subsequent arguments are extras: language names are looked up in `languages/`, and module names (e.g. `git`, `ticketing`) are looked up as top-level directories.
 
 See available options:
 
@@ -60,38 +66,38 @@ llm-forge --help
 ### Examples
 
 ```bash
-# Cursor + Python + Git rules
-llm-forge cursor python git
+# Just the agent rules
+llm-forge agent
 
-# Cursor + Composer (agent) hardening + Ansible + Git (example)
-llm-forge cursor composer ansible git
+# Agent + Python + Git
+llm-forge agent python git
 
-# Cursor + JavaScript + Ticketing rules
-llm-forge cursor javascript ticketing
+# Agent + JavaScript + Ticketing
+llm-forge agent javascript ticketing
 
-# Everything (cursor + all cursor extras + all top-level modules)
+# Everything: root base + every tool dir + every language + every module
 llm-forge all
 ```
 
-Copy the output into your LLM tool's configuration (e.g., Cursor Settings → User Rules).
+Copy the output into your LLM tool's user rules configuration (e.g. Cursor Settings → User Rules, or `~/.claude/CLAUDE.md`).
 
-## How It Works
+## How it works
 
-Rules follow an inheritance chain:
+Rules are organised by concern rather than by tool:
 
-1. **Root `base.md`**: Universal principles that apply everywhere
-2. **Tool-specific `base.md`**: Tool-specific guidelines (e.g., `cursor/base.md`)
-3. **Language-specific files**: Combined tool + language rules (e.g., `cursor/python.md`)
-4. **Module files**: Additional rule sets (e.g., `git/base.md`, `ticketing/base.md`, `code-review/base.md`)
+1. **Root `base.md`** — universal principles
+2. **Tool directories** — focused groups of rules for a category of LLM usage. `agent/` is the main one today, covering any agent / pair-programming mode (Cursor Composer, Claude Code, Cline, Aider).
+3. **`languages/`** — language-specific rules (Python, JavaScript, …)
+4. **Modules** — additional rule sets layered on top (`git/`, `ticketing/`, `ansible/`, `code-review/`)
 
-Each level builds upon the previous, allowing for shared best practices while maintaining specificity where needed.
+`llm-forge <tool> [extras...]` concatenates root base → all files in the tool dir → each extra, in that order.
 
 ## Contributing
 
 This is an opinionated collection. Contributions are welcome for:
+
 - New language support
-- New tool support
-- New modules
+- New rule modules
 - Improvements to existing rules
 
 ## License
