@@ -1,15 +1,13 @@
-# Cursor + Python Rules
+# Python Rules
 
-Rules specific to using Cursor with Python development.
+Rules specific to Python development.
 
-**Inherits from:** 
-- `../base.md` (root base rules)
-- `./base.md` (Cursor base rules)
+**Inherits from:** `../base.md`
 
-## Environment and dependency commands (Composer / agent)
+## Environment and dependency commands (agent mode)
 
-- Run `uv`, `uv venv`, `pip`, `pip install`, or other package/env commands **only** when **B explicitly asked** for environment or dependency work (e.g. set up a venv, add a dependency, sync a lockfile).
-- If the task is code or review only, **do not** run those commands — **propose** the exact commands for B to run. See **`cursor/composer.md`** (*Host environment and installs*).
+- Run `uv`, `uv venv`, `pip`, `pip install`, or other package/env commands **only** when the user **explicitly asked** for environment or dependency work (e.g. set up a venv, add a dependency, sync a lockfile).
+- If the task is code or review only, **do not** run those commands — **propose** the exact commands for the user to run. See **`agent/composer.md`** (*Host environment and installs*).
 
 ## Python-Specific Guidelines
 
@@ -79,7 +77,7 @@ Raises:
 
 - One clear responsibility per class; keep `__init__` simple
 - Use dataclasses for simple data containers; prefer composition over inheritance
-- Use `@property` for computed attributes; avoid extra methods that aren’t needed
+- Use `@property` for computed attributes; avoid extra methods that aren't needed
 
 ## Testing
 
